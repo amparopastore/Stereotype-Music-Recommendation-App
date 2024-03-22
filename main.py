@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # configuration settings
 app.secret_key = os.random(2)
-app.config['SESSION_COOKIE_NAME'] = "AppName Cookie"
+app.config['SESSION_COOKIE_NAME'] = "StereoType Cookie"
 app.config['DEBUG'] = True
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
@@ -44,7 +44,5 @@ def home():
 # Artist recommendations
 
 # Song recommendations
-
-#-------------------------------- DASHBOARD ---------------------------------
 
 #--------------------------------- ERROR HANDLER ---------------------------------
