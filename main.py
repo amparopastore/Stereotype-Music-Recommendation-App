@@ -21,41 +21,36 @@ redirect_uri = config.REDIRECT_URI
 #--------------------------------- LOGIN/HOME ---------------------------------
 spotify_client = SpotifyClient(client_id, client_secret, redirect_uri)
 
-@app.route("/", methods=['POST', 'GET'])
+@app.route("/", methods=['GET', 'POST'])
 def index():
     """
     Redirect to Spotify's login page
     """
-    authorization_url = spotify_client.request_authorization_url()
+    authorization_url = spotify_client.request_auth_url()
     return redirect(authorization_url)
 
-@app.route("/callback/q")
+@app.route("/callback", methods=['GET'])
 def callback():
     """
     Handle callback from Spotify after user login
     """
     # Extract authorization code from query parameters
-    authorization_code = request.args['code']
-    
+    authorization_code = request.args.get('code')
+    state = request.args.get('state')
+
     # Exchange authorization code for access token
-    access_token_info = spotify_client.exchange_code_for_token(authorization_code)
-
-    # Store access token in session
-    if access_token_info:
-        session['access_token'] = access_token_info['access_token']
-        return redirect(url_for('home',_external=True))
+    access_token_info = spotify_client.exchange_code_for_token(authorization_code, state)
     
-    return "Authentication failed."
+    # Store access token in session
+    session['access_token'] = access_token_info['access_token']
+    return redirect(url_for('home'))
 
-@app.route("/home")
+@app.route("/home", methods=['GET'])
 def home():
     """
     Render home page after successful login
     """
-    if 'access_token' in session:
-        return render_template('index.html')
-    else:
-        return redirect(url_for('index'))
+    return render_template('index.html')
 
 #-------------------------------- RECOMMENDATIONS ---------------------------------
 # Artist recommendations
