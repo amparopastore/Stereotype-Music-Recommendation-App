@@ -3,34 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StereoType- Home</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>StereoType - Home</title>
+  <link rel="stylesheet" href="static/styles.css">
   <link rel="icon" type="image/x-icon" href="music icon.png">
 
 </head>
 <body>
   <header>
-    
-    <h1>Music Recommendation</h1>
+    <img src="static/logo-round-transp.png" alt="StereoType Logo">
+    <h1>StereoType</h1>
     <nav>
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="artists.html">Artists</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('trending') }}">Trending</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
       </ul>
     </nav>
   </header>
 
   <div id="content">
-    <h2>Welcome to Music Recommendation!</h2>
+    {% if 'access_token' not in session %}
+    <h2>Welcome to StereoType!</h2>
     <p>Discover new music, get personalized recommendations, and explore trending artists.</p>
-    <button id="linkSpotifyBtn">Link Spotify Account</button>
+    <a href="{{ authorization_url }}"><button id="linkSpotifyBtn">Login with Spotify</button></a>
+    {% endif %}
+  
+    {% if user_profile %}
+      <h2>Welcome, {{ user_profile.display_name }}!</h2>
+      <p>Find your groove with new tunes, let's get started.</p>
+      <a href="{{ url_for('recommend_start') }}"><button id="recommendationsBtn">Get Recommendations</button></a>
+    {% endif %}
   </div>
 
   <footer>
-    <p>&copy; 2024 StereoType- Music Recommendation</p>
+    <p>&copy; 2024 StereoType</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="static/script.js"></script>
 </body>
 </html>

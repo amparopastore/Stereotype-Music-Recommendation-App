@@ -3,30 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StereoType- About</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>StereoType - About</title>
+  <link rel="stylesheet" href="static/styles.css">
   <link rel="icon" type="image/x-icon" href="music icon.png">
 
 </head>
 <body>
   <header>
-    <h1>Music Recommendation</h1>
+    <h1>StereoType</h1>
     <nav>
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="artists.html">Artists</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('trending') }}">Trending</a></li>
+        <li><a href="{{ url_for('about') }}">About</a></li>
       </ul>
     </nav>
   </header>
 
-  <div id="content">
-    <h2>About Music Recommendation</h2>
+  <div class="content-container" id="content">
+    <h2>About</h2>
     <p>This website provides music recommendations based on artists or genres.</p>
   </div>
 
   <footer>
-    <p>&copy; 2024 StereoType- Music Recommendation</p>
+    <p>&copy; 2024 StereoType</p>
   </footer>
+  <script src="static/script.js"></script>
 </body>
 </html>
