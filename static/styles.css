@@ -6,52 +6,94 @@ body {
   background-color: #ffffff;
 }
 
+/* Header Styles */
 header {
+  position: relative; /* Add positioning to allow stacking of elements */
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Align the logo and name to the left */
+  padding: 20px;
   background-image: url('banner-2.jpg');
   background-size: cover;
   background-position: center center;
   color: #fff;
-  padding: 20px;
-  text-align: center;
 }
 
-header img {
+.logo-container img {
   width: 100px;
-  height: auto; 
+  height: auto;
+  margin-right: 10px;
+  max-width: 100%;
+}
+
+.user-profile {
+  color: #fff;
+  margin-left: auto;
+  background-color: #202224; 
+  padding: 0px 10px; 
+  border-radius: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+  font-size: 17px; 
+}
+
+/* Navigation Styles */
+.nav-banner {
+  background-color: #202224; /* Background color for the navigation banner */
+  padding: 10px 20px; /* Adjust padding as needed */
 }
 
 nav ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  display: flex;
+  justify-content: center;
 }
 
 nav ul li {
-  display: inline;
-  margin-right: 10px;
+  margin-right: 35px;
+}
+
+nav ul li:last-child {
+  margin-right: 0;
 }
 
 nav ul li a {
   color: #fff;
   text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
 }
 
+/*Content*/
 #content {
   max-width: 800px;
   margin: 20px auto;
   text-align: center;
-  padding-bottom: 50px; /* Add padding to accommodate footer */
+}
+
+#content h2 {
+  font-size: 40px; 
+}
+
+#content p{
+  font-size: 20px;
 }
 
 /* Styles for buttons */
 button {
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 20px;
   background-color: #b756ad;
   color: white;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  border-radius: 50px;
 }
 
 button:hover {

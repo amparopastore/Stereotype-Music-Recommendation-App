@@ -5,21 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>StereoType - Home</title>
   <link rel="stylesheet" href="static/styles.css">
-  <link rel="icon" type="image/x-icon" href="music icon.png">
+  <link rel="icon" type="image/png" href="static/logo-round-transp.png">
 
 </head>
 <body>
   <header>
-    <img src="static/logo-round-transp.png" alt="StereoType Logo">
-    <h1>StereoType</h1>
-    <nav>
-      <ul>
-        <li><a href="{{ url_for('home') }}">Home</a></li>
-        <li><a href="{{ url_for('trending') }}">Trending</a></li>
-        <li><a href="{{ url_for('about') }}">About</a></li>
-      </ul>
-    </nav>
+    <div class="logo-container">
+      <img src="static/logo-round-transp.png" alt="StereoType Logo">
+      <h1>StereoType</h1>
+      {% if user_profile %}
+      <div class="user-profile">
+      <p>{{ user_profile.display_name }}</p>
+      </div>
+    {% endif %}
+    </div>
+    
+    <div class="nav-banner">
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('home') }}">HOME</a></li>
+          <li><a href="{{ url_for('trending') }}">TRENDING</a></li>
+          <li><a href="{{ url_for('recommend_start') }}">RECOMMENDATIONS</a></li>
+          <li><a href="{{ url_for('about') }}">ABOUT</a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
+  
 
   <div id="content">
     {% if 'access_token' not in session %}

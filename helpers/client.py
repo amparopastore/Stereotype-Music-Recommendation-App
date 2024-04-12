@@ -2,6 +2,7 @@ import requests
 import base64
 import os
 import urllib.parse
+import random
 
 class SpotifyClient:
     AUTHORIZATION_URL = 'https://accounts.spotify.com/authorize'
@@ -80,14 +81,14 @@ class SpotifyClient:
             if response.status_code == 200:
                 related_artists_data = response.json().get('artists', [])
                 if related_artists_data:  # Check if there are related artists
-                    first_related_artist = related_artists_data[0]  # Fetching data for the first related artist
+                    selected_related_artist = random.choice(related_artists_data)
                     artist_info = {
-                        'id': first_related_artist['id'],
-                        'name': first_related_artist['name'],
-                        'external_urls': first_related_artist['external_urls']['spotify'],
-                        'popularity': first_related_artist['popularity'],
-                        'followers': first_related_artist['followers'],  # Fetching followers
-                        'images': first_related_artist['images']  # Fetching images
+                        'id': selected_related_artist['id'],
+                        'name': selected_related_artist['name'],
+                        'external_urls': selected_related_artist['external_urls']['spotify'],
+                        'popularity': selected_related_artist['popularity'],
+                        'followers': selected_related_artist['followers'],  # Fetching followers
+                        'images': selected_related_artist['images']  # Fetching images
                     }
                     recommendations.append(artist_info)
             else:

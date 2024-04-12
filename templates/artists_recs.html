@@ -5,11 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recommended Artists</title>
     <link rel="stylesheet" href="static/styles.css">
+    <link rel="icon" type="image/png" href="static/logo-round-transp.png">
+
 </head>
 <body>
     <header>
-        <h1>Recommended Artists</h1>
-    </header>
+        <div class="logo-container">
+          <img src="static/logo-round-transp.png" alt="StereoType Logo">
+          <h1>StereoType</h1>
+        </div>
+        <div class="nav-banner">
+          <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">HOME</a></li>
+                <li><a href="{{ url_for('trending') }}">TRENDING</a></li>
+                <li><a href="{{ url_for('recommend_start') }}">RECOMMENDATIONS</a></li>
+                <li><a href="{{ url_for('about') }}">ABOUT</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
     
     <div class="content-container" id="content-recs">
         <div class="top-artists">
@@ -32,11 +47,11 @@
                     <li>
                         <img src="{{ artist['images'][0]['url'] }}" alt="{{ artist['name'] }}" width="100" height="100">
                         <br>
-                        <a href="{{ artist['external_urls']['spotify'] }}" target="_blank">{{ artist['name'] }}</a>
+                        <a href="{{ artist['external_urls'] }}" target="_blank">{{ artist['name'] }}</a> <!-- Access the URL directly -->
                     </li>
                 {% endfor %}
             </ul>
-        </div>
+        </div>        
     </div>
 
     <footer>

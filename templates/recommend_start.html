@@ -5,24 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Recommendation - Start</title>
     <link rel="stylesheet" href="static/styles.css">
+    <link rel="icon" type="image/png" href="static/logo-round-transp.png">
 </head>
 <body>
     <header>
-        <h1>Start Recommendation</h1>
-    </header>
+        <div class="logo-container">
+          <img src="static/logo-round-transp.png" alt="StereoType Logo">
+          <h1>StereoType</h1>
+        </div>
+        <div class="nav-banner">
+          <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">HOME</a></li>
+                <li><a href="{{ url_for('trending') }}">TRENDING</a></li>
+                <li><a href="{{ url_for('recommend_start') }}">RECOMMENDATIONS</a></li>
+                <li><a href="{{ url_for('about') }}">ABOUT</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
     
     <div class="content-container" id="content">
         <h2>Choose Type of Recommendation</h2>
         <div class="recommendation-buttons">
             <form action="{{ url_for('recommend_start') }}" method="post">
                 <input type="hidden" name="seed_type" value="artist">
-                <button type="submit">Get Artist Recommendations</button>
+                <button type="submit">Artists</button>
             </form>
             <br>
             <form action="{{ url_for('recommend_start') }}" method="post">
                 <input type="hidden" name="seed_type" value="track">
-                <button type="submit">Get Track Recommendations</button>
+                <button type="submit">Songs</button>
             </form>
+            <br><br>
         </div>
     </div>    
     
