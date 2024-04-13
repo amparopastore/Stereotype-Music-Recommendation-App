@@ -55,19 +55,24 @@ def home():
 
 @app.route("/about",  methods=['GET'])
 def about():
-    return render_template('about.html')
+    user_profile = spotify_client.get_user_profile()
+    return render_template('about.html', user_profile=user_profile)
 
-@app.route("/trending",  methods=['GET'])
-def trending():
-    return render_template('trending.html')
+@app.route("/dashboard",  methods=['GET'])
+def dashboard():
+    user_profile = spotify_client.get_user_profile()
+    top_artists = spotify_client.get_top_items(type='artists')
+    top_tracks = spotify_client.get_top_items(type='tracks')
+    return render_template('dashbooard.html', user_profile=user_profile, top_artists=top_artists, top_tracks=top_tracks)
 
 #-------------------------------- RECOMMENDATIONS PAGE ---------------------------------
 # Artist & track recommendations
 
 @app.route("/recommend_start", methods=['GET', 'POST'])
 def recommend_start():
+    user_profile = spotify_client.get_user_profile()
     if request.method == 'GET':
-        return render_template('recommend_start.html')
+        return render_template('recommend_start.html', user_profile=user_profile)
     elif request.method == 'POST':
         seed_type = request.form['seed_type'] 
         if seed_type == 'artist':
@@ -77,15 +82,17 @@ def recommend_start():
 
 @app.route("/recommend_artists", methods=['GET', 'POST'])
 def recommend_artists():
+    user_profile = spotify_client.get_user_profile()
     top_artists = spotify_client.get_top_items(type='artists')
     recommendations = spotify_client.get_artist_recommendations()
-    return(render_template('artists_recs.html', top_artists=top_artists, recommendations=recommendations))
+    return(render_template('artists_recs.html', top_artists=top_artists, recommendations=recommendations, user_profile=user_profile))
 
 @app.route("/recommend_songs", methods=['GET', 'POST'])
 def recommend_songs():
+    user_profile = spotify_client.get_user_profile()
     top_songs = spotify_client.get_top_items(type='tracks')
     recommendations = spotify_client.get_track_recommendations()
-    return(render_template('songs_recs.html', top_songs=top_songs, recommendations=recommendations))
+    return(render_template('songs_recs.html', top_songs=top_songs, recommendations=recommendations, user_profile=user_profile))
 
 
 #--------------------------------- ERROR HANDLER ---------------------------------

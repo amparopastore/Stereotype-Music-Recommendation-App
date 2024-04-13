@@ -10,14 +10,20 @@
 <body>
     <header>
         <div class="logo-container">
-          <img src="static/logo-round-transp.png" alt="StereoType Logo">
-          <h1>StereoType</h1>
-        </div>
+            <img src="static/logo-round-transp.png" alt="StereoType Logo">
+            <h1>StereoType</h1>
+            {% if user_profile %}
+            <div class="user-profile">
+            <img src="{{ user_profile['images'][0]['url'] }}" alt="Profile Image" width="200">
+            <p>{{ user_profile.display_name }}</p>
+            </div>
+          {% endif %}
+          </div>
         <div class="nav-banner">
           <nav>
             <ul>
                 <li><a href="{{ url_for('home') }}">HOME</a></li>
-                <li><a href="{{ url_for('trending') }}">TRENDING</a></li>
+                <li><a href="{{ url_for('dashboard') }}">DASHBOARD</a></li>
                 <li><a href="{{ url_for('recommend_start') }}">RECOMMENDATIONS</a></li>
                 <li><a href="{{ url_for('about') }}">ABOUT</a></li>
             </ul>

@@ -30,6 +30,8 @@ header {
 }
 
 .user-profile {
+  display: flex;
+  align-items: center;
   color: #fff;
   margin-left: auto;
   background-color: #202224; 
@@ -38,6 +40,13 @@ header {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   font-weight: bold;
   font-size: 17px; 
+}
+
+.user-profile img {
+  width: 40px;  /* Adjust as needed */
+  height:40px; /* Adjust as needed */
+  border-radius: 50%; /* Makes the image circular */
+  margin-right: 15px; /* Adds some space between image and text */
 }
 
 /* Navigation Styles */
@@ -175,4 +184,65 @@ footer {
   bottom: 0;
   width: 100%;
   transition: bottom 0.3s; /* Add smooth transition */
+}
+
+/*-----------------Dashboard Styles-----------------*/
+
+.dashboard {
+  max-width: 90%; /* Changed to occupy full width */
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.dashboard-top {
+  padding: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.dashboard-top h2 {
+  margin-top: 0;
+  font-size: 24px;
+}
+
+.dashboard-top .horizontal-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scrollbar-width: none;
+}
+
+.dashboard-top ul.artists-list,
+.dashboard-top ul.tracks-list {
+  list-style-type: none;
+  padding: 0;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 30px; /* spacing between items */
+  animation: scrollAnimation 20s linear infinite;
+  width: 100%; /* Occupying full width */
+}
+
+.dashboard-top li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard-top li img {
+  border-radius: 20%;
+  width: 100px;
+  height: 100px;
+}
+
+/* Animation for scrolling */
+@keyframes scrollAnimation {
+  0% {
+      transform: translateX(0);
+  }
+  100% {
+      transform: translateX(-100%);
+  }
 }
