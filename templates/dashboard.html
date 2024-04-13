@@ -10,12 +10,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="body-dashboard">
   <header>
     
     <div class="logo-container">
-      <img src="static/logo-round-transp.png" alt="StereoType Logo">
-      <h1 class="logo-name">StereoType</h1>
+      <a href="/home" class="logo-link">
+          <img src="static/logo-round-transp.png" alt="StereoType Logo">
+          <h1 class="logo-name">StereoType</h1>
+      </a>
     
       {% if user_profile %}
       <div class="user-profile">

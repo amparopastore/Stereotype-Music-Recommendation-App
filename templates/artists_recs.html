@@ -10,68 +10,43 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
 </head>
+
 <body class="body-recs">
-  <header>
-    
-    <div class="logo-container">
-      <img src="static/logo-round-transp.png" alt="StereoType Logo">
-      <h1 class="logo-name">StereoType</h1>
-    
-      {% if user_profile %}
-      <div class="user-profile">
-        <div class="custom-dropdown">
-            <button class="btn btn-secondary custom-dropdown-toggle" id="customDropdownButton">
-                <img src="{{ user_profile['images'][0]['url'] }}" alt="Profile Image" width="40" height="40" class="rounded-circle">
-                <strong>{{ user_profile.display_name }}</strong>
-            </button>
-            <div class="custom-dropdown-menu" id="customDropdownMenu">
-                <a class="dropdown-item" href="{{ user_profile.external_urls.spotify }}" target="_blank">Open Spotify</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/logout">Logout</a>
-            </div>
-        </div>
-      </div>
-      {% endif %}
+  <div class="logo-container">
+    <a href="/home" class="logo-link">
+        <img src="static/logo-round-transp.png" alt="StereoType Logo">
+        <h1 class="logo-name">StereoType</h1>
+    </a>
+  </div>
 
-    </div>
-    {% if user_profile %}
-    <div class="nav-banner">
-      <nav>
-        <ul>
-          <li><a href="{{ url_for('home') }}">Home</a></li>
-          <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-          <li><a href="{{ url_for('recommend_start') }}">Recommendations</a></li>
-          <li><a href="{{ url_for('about') }}">About</a></li>
-        </ul>
-      </nav>
-    </div>
-    {% endif %}
-    </header>
-    
-    <div class="content-container" id="content-recs">
-      <h2 class="recommended-heading">Artists picked for you</h2>
-      <br>
-        <div class="recommended-artists">
+  <!-- Navigation buttons -->
+  <div class="nav-buttons">
+    <button class="btn btn-secondary" onclick="window.location.href='home'">Home</button>
+    <button class="btn btn-secondary" onclick="window.location.href='recommend_start'">Recommend</button>
+  </div>
 
-            <ul>
-              {% for artist in recommendations %}
-              <li>
-                  <a href="{{ artist['external_urls'] }}" target="_blank">
-                      <img src="{{ artist['images'][0]['url'] }}" alt="{{ artist['name'] }}" width="100" height="100">
-                  </a>
-                  <br>
-                  <a href="{{ artist['external_urls'] }}" target="_blank">{{ artist['name'] }}</a>
-              </li>
-          {% endfor %}
-            </ul>
-        </div>        
-    </div>
-    
+  <div class="content-container" id="content-recs">
+    <h2 class="recommended-heading">Artists picked for you</h2>
+    <br>
+      <div class="recommended-artists">
 
-    <footer>
-        <p>&copy; 2024 StereoType</p>
-    </footer>
+          <ul>
+            {% for artist in recommendations %}
+            <li>
+                <a href="{{ artist['external_urls'] }}" target="_blank">
+                    <img src="{{ artist['images'][0]['url'] }}" alt="{{ artist['name'] }}" width="100" height="100">
+                </a>
+                <br>
+                <a href="{{ artist['external_urls'] }}" target="_blank">{{ artist['name'] }}</a>
+            </li>
+        {% endfor %}
+          </ul>
+      </div>        
+  </div>
 
-    <script src="static/script.js"></script>
+  <!-- Footer -->
+  <footer>
+      <p>&copy; 2024 StereoType</p>
+  </footer>
+<script src="static/script.js"></script>
 </body>
-</html>

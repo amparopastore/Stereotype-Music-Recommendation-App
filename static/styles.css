@@ -39,6 +39,17 @@ header {
   font-size: 50px;
 }
 
+.logo-link {
+  text-decoration: none;
+  color: inherit; 
+  display: flex;
+  align-items: center;
+}
+
+.logo-link h1 {
+  display: inline;
+}
+
 /* User Profile Button Styles */
 .user-profile {
   display: flex;
@@ -151,7 +162,7 @@ nav ul li a:hover {
 
 /* Styles for buttons */
 button {
-  padding: 10px 20px;
+  padding: 20px 20px;
   font-size: 20px;
   background-color: #b756ad;
   color: white;
@@ -159,6 +170,7 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease;
   border-radius: 50px;
+  font-weight: bold;
 }
 
 button:hover {
@@ -182,6 +194,35 @@ button:hover {
   padding: 0;
 }
 
+/*-----------------Welcome Page Styles-----------------*/
+
+.spotify-logo {
+  width: 120px;
+  height: auto;
+  vertical-align: middle;
+}
+
+#linkSpotifyBtn {
+  padding: 10px 20px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding-left: 35px;
+  color: #000000;
+  font-weight: bold;
+  margin: 0;
+}
+
+body.body-welcome-loggedin {
+  background-image: url(stars.jpg);
+  background-color: #000000;
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  color: #ffffff;
+}
+
 /*-----------------Dashboard Styles-----------------*/
 
 .dashboard {
@@ -203,6 +244,7 @@ button:hover {
   margin-top: 10px;
   font-size: 40px;
   color: #ffffff;
+  text-align: center;
 }
 
 
@@ -290,12 +332,20 @@ button:hover {
 
 /* Top Artists Section */
 .dashboard-top:nth-child(odd) {
-  background-image: url('dashboard-background2.jpg'); 
+  background-image: url(stars.jpg); 
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 /* Top Tracks Section */
 .dashboard-top:nth-child(even) {
-  background-image: url('dashboard-background2.jpg'); 
+  background-image: url(stars.jpg); 
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 
@@ -310,7 +360,8 @@ button:hover {
 }
 
 /*-----------------Recommend Styles-----------------*/
-body.recommendation-page {
+body.recommendation-page,
+body.body-recs {
   background-image: url('stars.jpg');
   background-color: #000000;
   background-size: cover;
@@ -323,7 +374,8 @@ body.recommendation-page {
   align-items: center;
 }
 
-body.recommendation-page .logo-container {
+body.recommendation-page .logo-container, 
+body.body-recs .logo-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -333,7 +385,8 @@ body.recommendation-page .logo-container {
   color: #fff;
 }
 
-body.recommendation-page .logo-container img {
+body.recommendation-page .logo-container img, 
+body.body-recs .logo-container img {
   width: 100px;
   height: auto;
   margin-right: 10px;
@@ -341,7 +394,9 @@ body.recommendation-page .logo-container img {
   max-width: 100%;
 }
 
-body.recommendation-page .logo-name {
+body.recommendation-page .logo-name,
+body.body-recs .logo-name 
+{
   font-family: "Shrikhand", serif;
   font-weight: 400;
   font-style: normal;
@@ -378,7 +433,8 @@ body.recommendation-page h2 {
   color:#ffffff
 }
 
-body.recommendation-page footer {
+body.recommendation-page footer,
+body.body-recs footer {
   background-color: #000000;
   color: #fff;
   text-align: center;
@@ -402,6 +458,7 @@ body.recommendation-page footer {
   text-align: center;
   font-size: 50px;
   color: #fff;
+  margin-bottom: 0;
 }
 
 .recommended-artists ul, .recommended-songs ul {
@@ -411,12 +468,12 @@ body.recommendation-page footer {
   display: flex;
   justify-content: center;
   gap: 30px; /* spacing between items */
+  margin-top: 0;
 }
 
 .recommended-artists ul li, .recommended-songs ul li {
   text-align: center;
 }
-
 
 /* Center */
 #content-recs ul li:nth-child(3) img {
@@ -468,24 +525,32 @@ body.recommendation-page footer {
   color:#ffffff
 }
 #content-recs img {
-  border-radius: 20%;
+  border-radius: 50%;
   margin-bottom: 10px;
+  margin-right: 50px;
+  box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; 
 }
 
-/* Styles for followers and popularity */
-#content-recs .stats {
-  font-size: 0.8em;
-  color: #ffffff;
+#content-recs img:last-child {
+  margin-right: 0;
 }
 
-body.body-recs {
-  background-image: url('stars.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  padding: 0;
-  margin: 0;
-  margin-bottom: 60px;
+#content-recs img:hover {
+  transform: scale(1.2); 
+  box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8); 
+  opacity: 0.5;
+}
+
+/* Navigation Buttons of Artists/Song Recs */
+.nav-buttons button {
+  background-color: #1b0a5f;
+  margin-right: 20px;
+  font-weight: bold;
+}
+
+.nav-buttons button:last-child {
+  margin-right: 0;
 }
 
 /*-----------------About Page Styles-----------------*/
@@ -515,12 +580,15 @@ body.body-recs {
 
 /*-----------------Footer Styles-----------------*/
 footer {
-  background-color: #aba5a5;
+  background-color: #000000;
   color: #fff;
   text-align: center;
   padding: 10px;
   position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
-  transition: bottom 0.3s; /* Add smooth transition */
+  margin: 0;
+  z-index: 1000;
+  transition: bottom 0.3s;
 }

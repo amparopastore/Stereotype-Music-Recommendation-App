@@ -47,5 +47,3 @@ function resumeAnimation(element) {
         item.style.animationPlayState = "running";
     });
 }
-
-  
