@@ -3,7 +3,10 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #ffffff;
+  background-image: #ffffff;
+  padding-bottom: 60px;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Header Styles */
@@ -15,7 +18,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: flex-start; /* Align the logo and name to the left */
-  padding: 20px;
+  padding: 10px 10px;
   background-image: url('banner-2.jpg');
   background-size: cover;
   background-position: center center;
@@ -29,24 +32,73 @@ header {
   max-width: 100%;
 }
 
+.logo-name {
+  font-family: "Shrikhand", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+}
+
+/* User Profile Button Styles */
 .user-profile {
   display: flex;
   align-items: center;
   color: #fff;
   margin-left: auto;
-  background-color: #202224; 
   padding: 0px 10px; 
-  border-radius: 50px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   font-weight: bold;
   font-size: 17px; 
+  position: relative;
 }
 
 .user-profile img {
-  width: 40px;  /* Adjust as needed */
-  height:40px; /* Adjust as needed */
-  border-radius: 50%; /* Makes the image circular */
-  margin-right: 15px; /* Adds some space between image and text */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-dropdown-toggle {
+  background-color: #b756ad;
+  color: #ffffff;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.custom-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  background-color: #666;
+  border-radius: 0.5rem;
+}
+
+.custom-dropdown-menu.show {
+  display: block;
+}
+
+.custom-dropdown-menu a {
+  display: block;
+  padding: 10px 15px;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.custom-dropdown-menu a:hover {
+  background-color: #b756ad;
 }
 
 /* Navigation Styles */
@@ -74,8 +126,12 @@ nav ul li:last-child {
 nav ul li a {
   color: #fff;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 25px;
   font-weight: bold;
+}
+
+nav ul li a:hover {
+  color: #a9d3cf;
 }
 
 /*Content*/
@@ -86,11 +142,11 @@ nav ul li a {
 }
 
 #content h2 {
-  font-size: 40px; 
+  font-size: 60px; 
 }
 
 #content p{
-  font-size: 20px;
+  font-size: 30px;
 }
 
 /* Styles for buttons */
@@ -126,53 +182,336 @@ button:hover {
   padding: 0;
 }
 
-/*-------------Songs-------------*/
-/* Styles for top songs and recommended songs */
-.top-songs,
-.recommended-songs {
-  text-align: center; /* Center-align the content */
+/*-----------------Dashboard Styles-----------------*/
+
+.dashboard {
+  max-width: 100%;
+  max-height: 100%; 
+  margin: 0 auto;
+  background-color: #000000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
-/* Styles for images */
-#content-recs img {
-  width: 150px;
-  height: auto;
-  border-radius: 8px;
+.dashboard-top {
+  padding: 20px;
+  border-bottom: 1px solid #000000;
+  flex-grow: 1;
 }
 
-/* Styles for song names */
-#content-recs p {
+.dashboard-top h2 {
   margin-top: 10px;
+  font-size: 40px;
+  color: #ffffff;
 }
 
+
+.dashboard-top .horizontal-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scrollbar-width: none;
+  display: flex; 
+  flex-wrap: nowrap; 
+  gap: 30px;
+  width: 100%; 
+  height: 100%;
+}
+
+.dashboard-top .horizontal-scroll:hover {
+  animation-play-state: paused; /* Pause the animation on hover */
+}
+
+.dashboard-top .horizontal-scroll:hover ~ .horizontal-scroll {
+  animation-play-state: paused; /* Pause the sibling animations on hover */
+}
+
+.dashboard-top .horizontal-scroll:hover {
+  animation-play-state: paused; /* Pause the animation on hover */
+}
+
+.dashboard-top ul.artists-list,
+.dashboard-top ul.tracks-list {
+  list-style-type: none;
+  padding: 0;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  gap: 50px; /* spacing between items */
+  animation: scrollAnimation 20s linear infinite;
+  width: 100%; 
+  height: 100%;
+}
+
+.dashboard-top li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.dashboard-top li img {
+  border-radius: 10%;
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  margin-bottom: 0px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.dashboard-top li:hover img {
+  opacity: 0.4;
+  transform: scale(1.1);
+}
+
+.dashboard-top li span {
+  text-align: center; 
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  width: 120px; 
+  font-weight: bold;
+  font-size: 12px;
+  position: absolute; 
+  top: 50%; 
+  left: 50%;
+  transform: translateX(-50%); 
+  color: #ffffff; 
+  padding: 5px 10px; 
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.dashboard-top li:hover span {
+  opacity: 1; /* Show the artist name on hover */
+}
+
+/* Top Artists Section */
+.dashboard-top:nth-child(odd) {
+  background-image: url('dashboard-background2.jpg'); 
+}
+
+/* Top Tracks Section */
+.dashboard-top:nth-child(even) {
+  background-image: url('dashboard-background2.jpg'); 
+}
+
+
+/* Animation for scrolling */
+@keyframes scrollAnimation {
+  0% {
+      transform: translateX(0);
+  }
+  100% {
+      transform: translateX(-100%);
+  }
+}
+
+/*-----------------Recommend Styles-----------------*/
+body.recommendation-page {
+  background-image: url('stars.jpg');
+  background-color: #000000;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+body.recommendation-page .logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 10px;
+  background: none;
+  width: 100%;
+  color: #fff;
+}
+
+body.recommendation-page .logo-container img {
+  width: 100px;
+  height: auto;
+  margin-right: 10px;
+  margin-left: 10px;
+  max-width: 100%;
+}
+
+body.recommendation-page .logo-name {
+  font-family: "Shrikhand", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+}
+
+body.recommendation-page .content-container {
+  background: url('banner.jpg');
+  border-radius: 100px;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  max-width: 800px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+body.recommendation-page button {
+  padding: 15px 30px; 
+  font-size: 30px;
+  font-weight: bold;
+  border-radius: 50px; 
+  margin-top: 15px; 
+  background-color: #b756ad;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+body.recommendation-page button:hover {
+  background-color: #752e71;
+  transform: scale(1.05); 
+}
+
+
+body.recommendation-page h2 {
+  color:#ffffff
+}
+
+body.recommendation-page footer {
+  background-color: #000000;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  transition: bottom 0.3s;
+}
+
+/*-------------Songs-------------*/
 /*-------------Artists-------------*/
-/* Styles for top artists and recommended artists */
-.top-artists,
-.recommended-artists {
-  text-align: center; /* Center-align the content */
+/* Styles for recommended pages */
+.recommended-artists, .recommended-songs {
+  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
-/* Styles for images */
-#content-recs img {
+.recommended-heading {
+  text-align: center;
+  font-size: 50px;
+  color: #fff;
+}
+
+.recommended-artists ul, .recommended-songs ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px; /* spacing between items */
+}
+
+.recommended-artists ul li, .recommended-songs ul li {
+  text-align: center;
+}
+
+
+/* Center */
+#content-recs ul li:nth-child(3) img {
+  width: 200px;
+  height: auto;
+}
+
+/* to the sides and a little below */
+#content-recs ul li:nth-child(2) img,
+#content-recs ul li:nth-child(4) img {
   width: 150px;
   height: auto;
-  border-radius: 8px;
 }
 
-/* Styles for artist names */
+/* to the outer sides and a little below */
+#content-recs ul li:nth-child(1) img,
+#content-recs ul li:nth-child(5) img {
+  width: 100px;
+  height: auto;
+}
+
+/* Center */
+#content-recs ul li:nth-child(3) {
+  margin-top: 60px; /* Adjust this value to move the center image up or down */
+}
+
+/* Artists to the sides and a little below */
+#content-recs ul li:nth-child(2),
+#content-recs ul li:nth-child(4) {
+  margin-top: 90px;
+}
+
+/* Artists to the outer sides and a little below */
+#content-recs ul li:nth-child(1),
+#content-recs ul li:nth-child(5) {
+  margin-top: 120px;
+}
+
+/* Styles for names */
 #content-recs a {
   display: block;
   margin-top: 10px;
   font-weight: bold;
   text-decoration: none;
-  color: #333;
+  color: #ffffff;
+}
+
+#content-recs p {
+  color:#ffffff
+}
+#content-recs img {
+  border-radius: 20%;
+  margin-bottom: 10px;
 }
 
 /* Styles for followers and popularity */
 #content-recs .stats {
   font-size: 0.8em;
-  color: #666;
+  color: #ffffff;
 }
+
+body.body-recs {
+  background-image: url('stars.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 60px;
+}
+
+/*-----------------About Page Styles-----------------*/
+
+#content-about {
+  max-width: 80%;
+  max-height: fit-content;
+  margin: 50px auto;
+  padding: 20px;
+}
+
+#content-about h2 {
+  font-size: 2em;
+  color: #333333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+#content-about p {
+  font-size: 25px;
+  line-height: 1.6;
+  color: #555555;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
 
 /*-----------------Footer Styles-----------------*/
 footer {
@@ -184,65 +523,4 @@ footer {
   bottom: 0;
   width: 100%;
   transition: bottom 0.3s; /* Add smooth transition */
-}
-
-/*-----------------Dashboard Styles-----------------*/
-
-.dashboard {
-  max-width: 90%; /* Changed to occupy full width */
-  margin: 0 auto;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.dashboard-top {
-  padding: 20px;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.dashboard-top h2 {
-  margin-top: 0;
-  font-size: 24px;
-}
-
-.dashboard-top .horizontal-scroll {
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-  scrollbar-width: none;
-}
-
-.dashboard-top ul.artists-list,
-.dashboard-top ul.tracks-list {
-  list-style-type: none;
-  padding: 0;
-  display: inline-flex;
-  flex-wrap: nowrap;
-  gap: 30px; /* spacing between items */
-  animation: scrollAnimation 20s linear infinite;
-  width: 100%; /* Occupying full width */
-}
-
-.dashboard-top li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.dashboard-top li img {
-  border-radius: 20%;
-  width: 100px;
-  height: 100px;
-}
-
-/* Animation for scrolling */
-@keyframes scrollAnimation {
-  0% {
-      transform: translateX(0);
-  }
-  100% {
-      transform: translateX(-100%);
-  }
 }

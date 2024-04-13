@@ -3,34 +3,49 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>StereoType - Home</title>
+  <title>Home - StereoType</title>
   <link rel="stylesheet" href="static/styles.css">
   <link rel="icon" type="image/png" href="static/logo-round-transp.png">
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
 </head>
 <body>
   <header>
+    
     <div class="logo-container">
       <img src="static/logo-round-transp.png" alt="StereoType Logo">
-      <h1>StereoType</h1>
+      <h1 class="logo-name">StereoType</h1>
+    
       {% if user_profile %}
       <div class="user-profile">
-      <img src="{{ user_profile['images'][0]['url'] }}" alt="Profile Image" width="200">
-      <p>{{ user_profile.display_name }}</p>
+        <div class="custom-dropdown">
+            <button class="btn btn-secondary custom-dropdown-toggle" id="customDropdownButton">
+                <img src="{{ user_profile['images'][0]['url'] }}" alt="Profile Image" width="40" height="40" class="rounded-circle">
+                <strong>{{ user_profile.display_name }}</strong>
+            </button>
+            <div class="custom-dropdown-menu" id="customDropdownMenu">
+                <a class="dropdown-item" href="{{ user_profile.external_urls.spotify }}" target="_blank">Open Spotify</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Logout</a>
+            </div>
+        </div>
       </div>
-    {% endif %}
+      {% endif %}
+
     </div>
-    
+    {% if user_profile %}
     <div class="nav-banner">
       <nav>
         <ul>
-          <li><a href="{{ url_for('home') }}">HOME</a></li>
-          <li><a href="{{ url_for('dashboard') }}">DASHBOARD</a></li>
-          <li><a href="{{ url_for('recommend_start') }}">RECOMMENDATIONS</a></li>
-          <li><a href="{{ url_for('about') }}">ABOUT</a></li>
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+          <li><a href="{{ url_for('recommend_start') }}">Recommendations</a></li>
+          <li><a href="{{ url_for('about') }}">About</a></li>
         </ul>
       </nav>
     </div>
+    {% endif %}
   </header>
   
 
@@ -42,7 +57,7 @@
     {% endif %}
   
     {% if user_profile %}
-      <h2>Welcome, {{ user_profile.display_name }}!</h2>
+      <h2>Hi there, {{ user_profile.display_name }}!</h2>
       <p>Find your groove with new tunes, let's get started.</p>
       <a href="{{ url_for('recommend_start') }}"><button id="recommendationsBtn">Get Recommendations</button></a>
     {% endif %}
@@ -51,7 +66,7 @@
   <footer>
     <p>&copy; 2024 StereoType</p>
   </footer>
-
+  
   <script src="static/script.js"></script>
 </body>
 </html>

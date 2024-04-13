@@ -1,55 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Music Recommendation - Start</title>
-    <link rel="stylesheet" href="static/styles.css">
-    <link rel="icon" type="image/png" href="static/logo-round-transp.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recommend - StereoType</title>
+  <link rel="stylesheet" href="static/styles.css">
+  <link rel="icon" type="image/png" href="static/logo-round-transp.png">
+  <!---Google font import-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
 </head>
-<body>
-    <header>
+    <body class="recommendation-page">
         <div class="logo-container">
             <img src="static/logo-round-transp.png" alt="StereoType Logo">
-            <h1>StereoType</h1>
-            {% if user_profile %}
-            <div class="user-profile">
-            <img src="{{ user_profile['images'][0]['url'] }}" alt="Profile Image" width="200">
-            <p>{{ user_profile.display_name }}</p>
+            <h1 class="logo-name">StereoType</h1>
+        </div>
+        <div class="content-container" id="content">
+            <h2>Choose Type of Recommendation</h2>
+            <div class="recommendation-buttons">
+                <form action="{{ url_for('recommend_start') }}" method="post">
+                    <input type="hidden" name="seed_type" value="artist">
+                    <button type="submit">Artists</button>
+                </form>
+                <br>
+                <form action="{{ url_for('recommend_start') }}" method="post">
+                    <input type="hidden" name="seed_type" value="track">
+                    <button type="submit">Songs</button>
+                </form>
+                <br><br>
             </div>
-          {% endif %}
-          </div>
-        <div class="nav-banner">
-          <nav>
-            <ul>
-                <li><a href="{{ url_for('home') }}">HOME</a></li>
-                <li><a href="{{ url_for('dashboard') }}">DASHBOARD</a></li>
-                <li><a href="{{ url_for('recommend_start') }}">RECOMMENDATIONS</a></li>
-                <li><a href="{{ url_for('about') }}">ABOUT</a></li>
-            </ul>
-          </nav>
         </div>
-      </header>
     
-    <div class="content-container" id="content">
-        <h2>Choose Type of Recommendation</h2>
-        <div class="recommendation-buttons">
-            <form action="{{ url_for('recommend_start') }}" method="post">
-                <input type="hidden" name="seed_type" value="artist">
-                <button type="submit">Artists</button>
-            </form>
-            <br>
-            <form action="{{ url_for('recommend_start') }}" method="post">
-                <input type="hidden" name="seed_type" value="track">
-                <button type="submit">Songs</button>
-            </form>
-            <br><br>
-        </div>
-    </div>    
-    
-    <footer>
-        <p>&copy; 2024 StereoType</p>
-    </footer>
-    <script src="static/script.js"></script>
-</body>
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 StereoType</p>
+        </footer>
+    </body>    
 </html>

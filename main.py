@@ -18,7 +18,7 @@ client_secret = config.SPOTIFY_CLIENT_SECRET
 redirect_uri = config.REDIRECT_URI
 
 
-#--------------------------------- LOGIN/HOME PAGE ---------------------------------
+#--------------------------------- LOGIN/HOME PAGE/LOGOUT ---------------------------------
 spotify_client = SpotifyClient(client_id, client_secret, redirect_uri)
 
 @app.route("/", methods=['GET', 'POST'])
@@ -41,7 +41,7 @@ def callback():
     # Exchange authorization code for access token
     access_token_info = spotify_client.exchange_code_for_token(authorization_code, state)
     
-    # Store access token in session
+    # Store access token and user id in session
     session['access_token'] = access_token_info['access_token']
     return redirect(url_for('home'))
 
@@ -53,23 +53,40 @@ def home():
     user_profile = spotify_client.get_user_profile()
     return render_template('index.html', user_profile=user_profile)
 
+@app.route("/logout", methods=['GET'])
+def logout():
+    """
+    Log out the user by removing the access token from the session
+    """
+    session.pop('access_token', None)
+    return redirect(url_for('index'))
+
+#--------------------------------- EXTRA PAGES ---------------------------------
+
 @app.route("/about",  methods=['GET'])
 def about():
-    user_profile = spotify_client.get_user_profile()
-    return render_template('about.html', user_profile=user_profile)
+    if 'access_token' not in session:
+        return render_template ('about.html')
+    else:
+        user_profile = spotify_client.get_user_profile()
+        return render_template('about.html', user_profile=user_profile)
 
 @app.route("/dashboard",  methods=['GET'])
 def dashboard():
+    if 'access_token' not in session:
+        return render_template('index.html')
     user_profile = spotify_client.get_user_profile()
     top_artists = spotify_client.get_top_items(type='artists')
     top_tracks = spotify_client.get_top_items(type='tracks')
-    return render_template('dashbooard.html', user_profile=user_profile, top_artists=top_artists, top_tracks=top_tracks)
+    return render_template('dashboard.html', user_profile=user_profile, top_artists=top_artists, top_tracks=top_tracks)
 
 #-------------------------------- RECOMMENDATIONS PAGE ---------------------------------
 # Artist & track recommendations
 
 @app.route("/recommend_start", methods=['GET', 'POST'])
 def recommend_start():
+    if 'access_token' not in session:
+        return render_template('index.html')
     user_profile = spotify_client.get_user_profile()
     if request.method == 'GET':
         return render_template('recommend_start.html', user_profile=user_profile)

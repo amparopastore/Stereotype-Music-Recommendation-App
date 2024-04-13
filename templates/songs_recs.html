@@ -1,70 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recommended Songs</title>
-    <link rel="stylesheet" href="static/styles.css">
-    <link rel="icon" type="image/png" href="static/logo-round-transp.png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recommended Songs - StereoType</title>
+  <link rel="stylesheet" href="static/styles.css">
+  <link rel="icon" type="image/png" href="static/logo-round-transp.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <div class="logo-container">
-            <img src="static/logo-round-transp.png" alt="StereoType Logo">
-            <h1>StereoType</h1>
-            {% if user_profile %}
-            <div class="user-profile">
-            <img src="{{ user_profile['images'][0]['url'] }}" alt="Profile Image" width="200">
-            <p>{{ user_profile.display_name }}</p>
-            </div>
-          {% endif %}
-          </div>
-        <div class="nav-banner">
-          <nav>
-            <ul>
-                <li><a href="{{ url_for('home') }}">HOME</a></li>
-                <li><a href="{{ url_for('dashboard') }}">DASHBOARD</a></li>
-                <li><a href="{{ url_for('recommend_start') }}">RECOMMENDATIONS</a></li>
-                <li><a href="{{ url_for('about') }}">ABOUT</a></li>
-            </ul>
-          </nav>
-        </div>
-      </header>
+<body class="body-recs">
+  <header>
     
-    <div class="content-container" id="content-recs">
-        <div class="top-songs">
-            <h2>Based on your top songs...</h2>
-            <ul>
-                {% for song in top_songs[:5] %}
-                    <li>
-                        <img src="{{ song.album.images[0].url }}" alt="{{ song.name }} cover photo">
-                        <div class="song-info">
-                            <p><strong>{{ song.name }}</strong> by 
-                            {% for artist in song.artists %}
-                                {{ artist['name'] }}{% if not loop.last %}, {% endif %}
-                            {% endfor %}
-                            </p>
-                            <p><a href="{{ song.external_urls['spotify'] }}">Listen on Spotify</a></p>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
+    <div class="logo-container">
+      <img src="static/logo-round-transp.png" alt="StereoType Logo">
+      <h1 class="logo-name">StereoType</h1>
+    
+      {% if user_profile %}
+      <div class="user-profile">
+        <div class="custom-dropdown">
+            <button class="btn btn-secondary custom-dropdown-toggle" id="customDropdownButton">
+                <img src="{{ user_profile['images'][0]['url'] }}" alt="Profile Image" width="40" height="40" class="rounded-circle">
+                <strong>{{ user_profile.display_name }}</strong>
+            </button>
+            <div class="custom-dropdown-menu" id="customDropdownMenu">
+                <a class="dropdown-item" href="{{ user_profile.external_urls.spotify }}" target="_blank">Open Spotify</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/logout">Logout</a>
+            </div>
         </div>
-        
+      </div>
+      {% endif %}
+
+    </div>
+    {% if user_profile %}
+    <div class="nav-banner">
+      <nav>
+        <ul>
+          <li><a href="{{ url_for('home') }}">Home</a></li>
+          <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+          <li><a href="{{ url_for('recommend_start') }}">Recommendations</a></li>
+          <li><a href="{{ url_for('about') }}">About</a></li>
+        </ul>
+      </nav>
+    </div>
+    {% endif %}
+  </header>
+
+    <div class="content-container" id="content-recs">
+        <h2 class="recommended-heading">Songs picked for you</h2>
+        <br>
         <div class="recommended-songs">
-            <h2>You might like</h2>
             <ul>
                 {% for track in recommendations['tracks'][:5] %}
                 <li>
-                    <img src="{{ track['album']['images'][0]['url'] }}" alt="Album Art">
-                    <div class="song-info">
-                        <p><strong>{{ track['name'] }}</strong> by 
-                        {% for artist in track['artists'] %}
-                            {{ artist['name'] }}{% if not loop.last %}, {% endif %}
-                        {% endfor %}
-                        </p>
-                        <p><a href="{{ track['external_urls']['spotify'] }}">Listen on Spotify</a></p>
-                    </div>
+                    <a href="{{ track['external_urls']['spotify'] }}">
+                        <img src="{{ track['album']['images'][0]['url'] }}" alt="Album Art">
+                    </a>
+                    <br>
+                    <p><strong>{{ track['name'] }}</strong> by 
+                    {% for artist in track['artists'] %}
+                        {{ artist['name'] }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                    </p>
                 </li>                
                 {% endfor %}
             </ul>
@@ -78,3 +77,4 @@
     <script src="static/script.js"></script>
 </body>
 </html>
+
