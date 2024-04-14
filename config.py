@@ -1,4 +1,0 @@
-# config.py
-SPOTIFY_CLIENT_ID = 'df9173759e8d4e8db4fa6b763b8370a3'
-SPOTIFY_CLIENT_SECRET = 'c55a314d616d4fdcac71588a79afbe68'
-REDIRECT_URI = 'http://127.0.0.1:5500/callback'
