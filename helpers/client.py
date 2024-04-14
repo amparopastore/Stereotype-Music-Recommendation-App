@@ -105,3 +105,4 @@ class SpotifyClient:
         response = requests.get(endpoint_url, headers=headers, params=params)
         response.raise_for_status()
         return response.json()
+    

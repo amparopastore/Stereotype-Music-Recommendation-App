@@ -4,6 +4,10 @@ from flask import Flask, render_template, redirect, url_for, session, request
 import os
 from helpers.client import SpotifyClient
 import config
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # initialize flask app instance
 app = Flask(__name__)

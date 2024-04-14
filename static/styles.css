@@ -3,7 +3,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-image: #ffffff;
+  background-color:#ffffff;
   padding-bottom: 60px;
   align-items: center;
   justify-content: center;
@@ -478,21 +478,21 @@ body.body-recs footer {
 /* Center */
 #content-recs ul li:nth-child(3) img {
   width: 200px;
-  height: auto;
+  height: 200px;
 }
 
 /* to the sides and a little below */
 #content-recs ul li:nth-child(2) img,
 #content-recs ul li:nth-child(4) img {
   width: 150px;
-  height: auto;
+  height: 150px;
 }
 
 /* to the outer sides and a little below */
 #content-recs ul li:nth-child(1) img,
 #content-recs ul li:nth-child(5) img {
   width: 100px;
-  height: auto;
+  height: 100px;
 }
 
 /* Center */
@@ -527,7 +527,7 @@ body.body-recs footer {
 #content-recs img {
   border-radius: 50%;
   margin-bottom: 10px;
-  margin-right: 50px;
+  
   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease; 
 }
@@ -564,7 +564,7 @@ body.body-recs footer {
 
 #content-about h2 {
   font-size: 2em;
-  color: #333333;
+  color: #000000;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -572,7 +572,7 @@ body.body-recs footer {
 #content-about p {
   font-size: 25px;
   line-height: 1.6;
-  color: #555555;
+  color: #000000;
   margin-bottom: 15px;
   text-align: justify;
 }
