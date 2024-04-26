@@ -52,3 +52,16 @@ To run the app locally, execute:
 
 ```bash
 python app.py
+```
+
+## Demos
+
+![Login Demo]([https://github.com/amparopastore/Stereotype-Music-Recommendation-App/blob/main/gifs/welcome-page.gif])
+
+![Authorization Demo]([https://github.com/amparopastore/Stereotype-Music-Recommendation-App/blob/main/gifs/authorization.gif])
+
+![Home Demo]([https://github.com/amparopastore/Stereotype-Music-Recommendation-App/blob/main/gifs/home-about.gif])
+
+![Dashboard Demo]([https://github.com/amparopastore/Stereotype-Music-Recommendation-App/blob/main/gifs/dashboard.gif])
+
+![Recommendations Demo]([https://github.com/amparopastore/Stereotype-Music-Recommendation-App/blob/main/gifs/recommendations.gif])
