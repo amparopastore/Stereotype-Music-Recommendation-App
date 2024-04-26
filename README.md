@@ -56,12 +56,12 @@ python app.py
 
 ## Demos
 
-![Login Demo]([https://github.com/amparopastore/Stereotype-Music-Recommendation-App/blob/main/gifs/welcome-page.gif])
+![Login Demo](gifs/welcome-page.gif)
 
-![Authorization Demo]([https://github.com/amparopastore/Stereotype-Music-Recommendation-App/blob/main/gifs/authorization.gif])
+![Authorization Demo](gifs/authorization.gif)
 
-![Home Demo]([https://github.com/amparopastore/Stereotype-Music-Recommendation-App/blob/main/gifs/home-about.gif])
+![Home Demo](gifs/home-about.gif)
 
-![Dashboard Demo]([https://github.com/amparopastore/Stereotype-Music-Recommendation-App/blob/main/gifs/dashboard.gif])
+![Dashboard Demo](gifs/dashboard.gif)
 
-![Recommendations Demo]([https://github.com/amparopastore/Stereotype-Music-Recommendation-App/blob/main/gifs/recommendations.gif])
+![Recommendations Demo](gifs/recommendations.gif)
