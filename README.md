@@ -37,7 +37,7 @@ Before running this application, you need to have:
 2. Navigate to the project directory:
 
     ```bash
-    cd stereotype-flask-app
+    cd Stereotype-Music-Recommendation-App
     ```
 
 3. Install the required packages:
