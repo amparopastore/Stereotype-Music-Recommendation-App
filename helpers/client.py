@@ -4,7 +4,6 @@ import os
 import urllib.parse
 import random
 
-from collections import Counter
 
 class SpotifyClient:
     AUTHORIZATION_URL = 'https://accounts.spotify.com/authorize'
