@@ -4,6 +4,8 @@ import os
 import urllib.parse
 import random
 
+from collections import Counter
+
 class SpotifyClient:
     AUTHORIZATION_URL = 'https://accounts.spotify.com/authorize'
     TOKEN_URL = 'https://accounts.spotify.com/api/token'
@@ -80,15 +82,15 @@ class SpotifyClient:
             response = requests.get(url, headers=headers)
             if response.status_code == 200:
                 related_artists_data = response.json().get('artists', [])
-                if related_artists_data:  # Check if there are related artists
+                if related_artists_data:  # check if there are related artists
                     selected_related_artist = random.choice(related_artists_data)
                     artist_info = {
                         'id': selected_related_artist['id'],
                         'name': selected_related_artist['name'],
                         'external_urls': selected_related_artist['external_urls']['spotify'],
                         'popularity': selected_related_artist['popularity'],
-                        'followers': selected_related_artist['followers'],  # Fetching followers
-                        'images': selected_related_artist['images']  # Fetching images
+                        'followers': selected_related_artist['followers'],  # fetching followers
+                        'images': selected_related_artist['images']  # fetching images
                     }
                     recommendations.append(artist_info)
             else:
@@ -105,4 +107,3 @@ class SpotifyClient:
         response = requests.get(endpoint_url, headers=headers, params=params)
         response.raise_for_status()
         return response.json()
-    

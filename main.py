@@ -1,9 +1,7 @@
-#--------------------------------- IMPORTS ---------------------------------
-import flask
+#--------------------------------- IMPORTS/PRELIMINARIES ---------------------------------
 from flask import Flask, render_template, redirect, url_for, session, request
 import os
 from helpers.client import SpotifyClient
-import config
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -17,12 +15,15 @@ app.secret_key = os.urandom(2)
 app.config['SESSION_COOKIE_NAME'] = "StereoType Cookie"
 app.config['DEBUG'] = True
 app.config['TEMPLATES_AUTO_RELOAD'] = True
-client_id = config.SPOTIFY_CLIENT_ID
-client_secret = config.SPOTIFY_CLIENT_SECRET
-redirect_uri = config.REDIRECT_URI
 
+# Get environment variables
+client_id = os.getenv('SPOTIFY_CLIENT_ID')
+client_secret = os.getenv('SPOTIFY_CLIENT_SECRET')
+redirect_uri = os.getenv('REDIRECT_URI')
 
 #--------------------------------- LOGIN/HOME PAGE/LOGOUT ---------------------------------
+
+# Initialize Spotify client
 spotify_client = SpotifyClient(client_id, client_secret, redirect_uri)
 
 @app.route("/", methods=['GET', 'POST'])
@@ -69,14 +70,20 @@ def logout():
 
 @app.route("/about",  methods=['GET'])
 def about():
+    """
+    Render about page
+    """
     if 'access_token' not in session:
-        return render_template ('about.html')
+        return render_template('about.html')
     else:
         user_profile = spotify_client.get_user_profile()
         return render_template('about.html', user_profile=user_profile)
 
 @app.route("/dashboard",  methods=['GET'])
 def dashboard():
+    """
+    Render dashboard page
+    """
     if 'access_token' not in session:
         return render_template('index.html')
     user_profile = spotify_client.get_user_profile()
@@ -85,10 +92,12 @@ def dashboard():
     return render_template('dashboard.html', user_profile=user_profile, top_artists=top_artists, top_tracks=top_tracks)
 
 #-------------------------------- RECOMMENDATIONS PAGE ---------------------------------
-# Artist & track recommendations
 
 @app.route("/recommend_start", methods=['GET', 'POST'])
 def recommend_start():
+    """
+    Render recommendation start page and handle form submission
+    """
     if 'access_token' not in session:
         return render_template('index.html')
     user_profile = spotify_client.get_user_profile()
@@ -103,20 +112,48 @@ def recommend_start():
 
 @app.route("/recommend_artists", methods=['GET', 'POST'])
 def recommend_artists():
+    """
+    Render artist recommendations page
+    """
     user_profile = spotify_client.get_user_profile()
     top_artists = spotify_client.get_top_items(type='artists')
     recommendations = spotify_client.get_artist_recommendations()
-    return(render_template('artists_recs.html', top_artists=top_artists, recommendations=recommendations, user_profile=user_profile))
+    return render_template('artists_recs.html', top_artists=top_artists, recommendations=recommendations, user_profile=user_profile)
 
 @app.route("/recommend_songs", methods=['GET', 'POST'])
 def recommend_songs():
+    """
+    Render song recommendations page
+    """
     user_profile = spotify_client.get_user_profile()
     top_songs = spotify_client.get_top_items(type='tracks')
     recommendations = spotify_client.get_track_recommendations()
-    return(render_template('songs_recs.html', top_songs=top_songs, recommendations=recommendations, user_profile=user_profile))
+    return render_template('songs_recs.html', top_songs=top_songs, recommendations=recommendations, user_profile=user_profile)
 
 
-#--------------------------------- ERROR HANDLER ---------------------------------
+#--------------------------------- ERROR HANDLING PAGES ---------------------------------
+
+@app.errorhandler(401)
+def error401(error):
+    """
+    Handle error 401
+    """
+    return "Sorry, there was an error. Try refreshing the page and logging back in.", 401
+
+
+@app.errorhandler(403)
+def error403(error):
+    """
+    Handle error 403
+    """
+    return "Sorry, there was an error. Try refreshing the page and logging back in.", 403
+
+@app.errorhandler(429)
+def error429(error):
+    """
+    Handle error 429
+    """
+    return "Sorry, there was an error. Try refreshing the page and logging back in.", 429
 
 
 #--------------------------------- RUN LOCALLY --------------------------------- 
